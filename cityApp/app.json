@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "cityApp",
+    "slug": "cityApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
