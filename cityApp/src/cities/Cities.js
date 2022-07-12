@@ -1,27 +1,59 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    ScrollView
+ } from 'react-native';
 
-const Cities = (props) => {
-    console.log(props);
+ import CenterMessage from '../components/CenterMessage';
+import { colors } from '../theme';
+
+const Cities = ({cities, props: {navigation}}) => {
+    const navigate = (item) => {
+      navigation.navigate('City', { city: item })
+    }
+
+    const onPressHandler = (item) => {
+        navigate(item);
+    }
+
     return(
-        <View style={styles.header}>
-            <Text style={styles.headerText}>
-                Cities
-            </Text>
-        </View>
+        <ScrollView contentContainerStyle={[!cities.length && { flex: 1 }]}>
+            <View style={[!cities.length && { justifyContent: 'center', flex: 1 }]}>
+                {
+                    !cities.length && <CenterMessage message='No saved cities!'/>
+                }
+
+                {
+                    cities.map((item, index) => (
+                        <TouchableWithoutFeedback
+                            onPress={() => onPressHandler(item)} key={index} >
+                        <View style={styles.cityContainer}>
+                            <Text style={styles.city}>{item.city}</Text>
+                            <Text style={styles.country}>{item.country}</Text>
+                        </View>
+                        </TouchableWithoutFeedback>
+                    ))
+                }
+            </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    header: {
-        marginTop: 80
+    cityContainer: {
+      padding: 10,
+      borderBottomWidth: 2,
+      borderBottomColor: colors.primary
     },
-    headerText: {
-        textAlign: 'center',
-        fontSize: 72,
-        color: 'rgba(175, 47, 47, 0.25)',
-        fontWeight: '100'
-    }
-});
+    city: {
+      fontSize: 20,
+    },
+    country: {
+      color: 'rgba(0, 0, 0, .5)'
+    },  
+  })
 
 export default Cities;

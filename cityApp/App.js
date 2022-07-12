@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import {
-    Text,
-    View,
-   } from 'react-native';
 
 import { Nav} from './src/index';
 
@@ -48,7 +44,6 @@ export default class App extends Component {
     render() {
         return (
             <>
-              <View><Text>Oso</Text></View>
               <Nav
                   screenProps={{
                     cities: this.state.cities,
